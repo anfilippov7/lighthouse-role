@@ -1,0 +1,59 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint: |
+  ansible-lint .
+  yamllint .
+platforms:
+  - name: centos8
+    image: quay.io/centos/centos:stream8
+
+    #   image: docker.io/pycontribs/centos:7
+    #image: quay.io/centos/centos:stream8
+    #image: docker.io/jgeusebroek/centos8-molecule
+    # command:
+    #   [
+    #     cd /etc/yum.repos.d/,
+    #     sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*,
+    #     sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*,
+    #     yum update -y,
+    #   ]
+
+    pre_build_image: true
+
+  # - name: centos-8
+  #   image: quay.io/ansible-freeipa/upstream-tests:centos-8
+  #   pre_build_image: true
+
+  # - name: ubuntu
+  #   image: docker.io/pycontribs/ubuntu:latest
+
+  # image: geerlingguy/docker-ubuntu2004-ansible
+  # tmpfs:
+  #   - /run
+  #   - /tmp
+  # volumes:
+  #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  # capabilities:
+  #   - SYS_ADMIN
+  # command: "/lib/systemd/systemd"
+
+  # pre_build_image: true
+
+# - name: MyMoleculePlatform
+#   image: megabytelabs/ansible-molecule-centos-8:latest
+#   command: ""
+#   tmpfs:
+#     - /run
+#     - /tmp
+#   volumes:
+#     - /sys/fs/cgroup:/sys/fs/cgroup:ro
+# - name: ubuntu
+#   image: docker.io/pycontribs/ubuntu:latest
+#   pre_build_image: true
+provisioner:
+  name: ansible
+verifier:
+  name: ansible
